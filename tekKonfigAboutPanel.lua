@@ -1,5 +1,5 @@
 
-local lib, oldminor = LibStub:NewLibrary("tekKonfig-AboutPanel", 3)
+local lib, oldminor = LibStub:NewLibrary("tekKonfig-AboutPanel", 4)
 if not lib then return end
 
 
@@ -110,4 +110,6 @@ function lib.OnShow(frame)
 			anchor = title
 		end
 	end
+
+	frame:SetScript("OnShow", nil)
 end
