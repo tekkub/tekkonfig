@@ -1,5 +1,5 @@
 
-local lib, oldminor = LibStub:NewLibrary("tekKonfig-Scroll", 1)
+local lib, oldminor = LibStub:NewLibrary("tekKonfig-Scroll", 2)
 if not lib then return end
 
 lib.bg = {
@@ -11,8 +11,8 @@ lib.bg = {
 }
 
 -- Creates a scrollbar
--- Parent is required, offset is optional
-function lib.new(parent, offset)
+-- Parent is required, offset and step are optional
+function lib.new(parent, offset, step)
 	local f = CreateFrame("Slider", nil, parent)
 	f:SetWidth(16)
 
@@ -35,7 +35,7 @@ function lib.new(parent, offset)
 
 	up:SetScript("OnClick", function(self)
 		local parent = self:GetParent()
-		parent:SetValue(parent:GetValue() - parent:GetHeight()/2)
+		parent:SetValue(parent:GetValue() - (step or parent:GetHeight()/2))
 		PlaySound("UChatScrollButton")
 	end)
 
@@ -55,7 +55,7 @@ function lib.new(parent, offset)
 
 	down:SetScript("OnClick", function(self)
 		local parent = self:GetParent()
-		parent:SetValue(parent:GetValue() + parent:GetHeight()/2)
+		parent:SetValue(parent:GetValue() + (step or parent:GetHeight()/2))
 		PlaySound("UChatScrollButton")
 	end)
 
