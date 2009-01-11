@@ -7,11 +7,12 @@ oldminor = oldminor or 0
 local GameTooltip = GameTooltip
 local function HideTooltip() GameTooltip:Hide() end
 local function ShowTooltip(self)
-	if self.tiptext then
+	if self.frame.tiptext then
 		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT")
-		GameTooltip:SetText(self.tiptext, nil, nil, nil, nil, true)
+		GameTooltip:SetText(self.frame.tiptext, nil, nil, nil, nil, true)
 	end
 end
+local function ShowTooltip2(self) ShowTooltip(self.container) end
 
 
 local function OnClick(self)
@@ -25,8 +26,10 @@ local function OnHide() CloseDropDownMenus() end
 -- Create a dropdown.
 -- All args optional, parent recommended
 function lib.new(parent, label, ...)
-	local container = CreateFrame("Frame", nil, parent)
+	local container = CreateFrame("Button", nil, parent)
 	container:SetWidth(149+13) container:SetHeight(32+24)
+	container:SetScript("OnEnter", ShowTooltip)
+	container:SetScript("OnLeave", HideTooltip)
 	if select("#", ...) > 0 then container:SetPoint(...) end
 
 	local name = "tekKonfigDropdown"..GetTime()  -- Sadly, some of these frames must be named
@@ -35,8 +38,7 @@ function lib.new(parent, label, ...)
 	f:SetPoint("TOPLEFT", container, -13, -24)
 	f:EnableMouse(true)
 	f:SetScript("OnHide", OnHide)
-	f:SetScript("OnEnter", ShowTooltip)
-	f:SetScript("OnLeave", HideTooltip)
+	container.frame = f
 
 	local ltex = f:CreateTexture(name.."Left", "ARTWORK")
 	ltex:SetWidth(25) ltex:SetHeight(64)
@@ -66,6 +68,8 @@ function lib.new(parent, label, ...)
 	button:SetWidth(24) button:SetHeight(24)
 	button:SetPoint("TOPRIGHT", rtex, -16, -18)
 	button:SetScript("OnClick", OnClick)
+	button:SetScript("OnEnter", ShowTooltip2)
+	button.container = container
 
 	button:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Up")
 	button:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollDown-Down")
