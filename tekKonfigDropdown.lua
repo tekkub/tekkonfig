@@ -1,5 +1,5 @@
 
-local lib, oldminor = LibStub:NewLibrary("tekKonfig-Dropdown", 2)
+local lib, oldminor = LibStub:NewLibrary("tekKonfig-Dropdown", 3)
 if not lib then return end
 oldminor = oldminor or 0
 
