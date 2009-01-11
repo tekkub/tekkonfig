@@ -74,9 +74,9 @@ function lib.new(parent, label, ...)
 	button:GetHighlightTexture():SetBlendMode("ADD")
 
 	local labeltext = f:CreateFontString(nil, "BACKGROUND", "GameFontNormal")--GameFontHighlight
-	labeltext:SetPoint("BOTTOMLEFT", f, "TOPLEFT", 16, 3)
+	labeltext:SetPoint("BOTTOMLEFT", container, "TOPLEFT", 16-13, 3-24)
 	labeltext:SetText(label)
 
-	return f, text, container
+	return f, text, container, labeltext
 end
 
