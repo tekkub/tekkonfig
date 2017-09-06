@@ -1,5 +1,5 @@
 
-local lib, oldminor = LibStub:NewLibrary("tekKonfig-Dropdown", 3)
+local lib, oldminor = LibStub:NewLibrary("tekKonfig-Dropdown", 4)
 if not lib then return end
 oldminor = oldminor or 0
 
@@ -17,7 +17,7 @@ local function ShowTooltip2(self) ShowTooltip(self.container) end
 
 local function OnClick(self)
 	ToggleDropDownMenu(nil, nil, self:GetParent())
-	PlaySound("igMainMenuOptionCheckBoxOn")
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
 end
 
 local function OnHide() CloseDropDownMenus() end
