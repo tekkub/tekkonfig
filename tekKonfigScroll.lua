@@ -1,5 +1,5 @@
 
-local lib, oldminor = LibStub:NewLibrary("tekKonfig-Scroll", 2)
+local lib, oldminor = LibStub:NewLibrary("tekKonfig-Scroll", 3)
 if not lib then return end
 
 lib.bg = {
@@ -36,7 +36,7 @@ function lib.new(parent, offset, step)
 	up:SetScript("OnClick", function(self)
 		local parent = self:GetParent()
 		parent:SetValue(parent:GetValue() - (step or parent:GetHeight()/2))
-		PlaySound("UChatScrollButton")
+		PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON)
 	end)
 
 	local down = CreateFrame("Button", nil, f)
@@ -56,7 +56,7 @@ function lib.new(parent, offset, step)
 	down:SetScript("OnClick", function(self)
 		local parent = self:GetParent()
 		parent:SetValue(parent:GetValue() + (step or parent:GetHeight()/2))
-		PlaySound("UChatScrollButton")
+		PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON)
 	end)
 
 	f:SetThumbTexture("Interface\\Buttons\\UI-ScrollBar-Knob")
